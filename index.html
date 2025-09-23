@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Create Account Form — Fixed</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="content">
+      <form id="signupForm" novalidate>
+        <h2>CREATE ACCOUNT</h2>
+
+        <div class="user_name">
+          <input type="text" id="your_name" name="your_name" placeholder="Your Name">
+        </div><br>
+
+        <div>
+          <input type="email" id="your_email" name="your_email" placeholder="Your Email">
+        </div><br>
+
+        <input type="password" id="your_password" name="your_password" placeholder="Password"><br>
+        <input type="password" id="repeat_password" name="repeat_password" placeholder="Repeat your password"><br>
+
+        <label for="terms_of_service">
+          <input type="checkbox" class="inline" id="terms_of_service" name="terms_of_service">
+          I agree to all statements in <a href="#">Terms of Service</a>
+        </label><br>
+
+        <!-- Use type='button' so the form doesn't submit/refresh during validation -->
+        <button type="button" onclick="validateForm()">SIGN UP</button>
+
+        <p id="result"></p>
+
+        <footer>
+          Have already an account? <a href="#" target="_blank" id="login">Login here</a>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function validateForm() {
+      const name = document.getElementById("your_name").value.trim();
+      const email = document.getElementById("your_email").value.trim();
+      const password = document.getElementById("your_password").value;
+      const repeatPassword = document.getElementById("repeat_password").value;
+      const termsChecked = document.getElementById("terms_of_service").checked;
+      const result = document.getElementById("result");
+
+      try {
+        // Validate Name
+        if (name === "") throw "Please enter your name";
+        if (name.length < 3) throw "Name must be at least 3 characters";
+        if (/\d/.test(name)) throw "Name must not include numbers";
+
+        // Validate Email
+        if (email === "") throw "Please enter the email";
+        if (!email.includes("@") || !email.includes(".")) throw "Invalid email format";
+
+        // Validate Password
+        if (password.length < 8) throw "Password should be at least 8 characters";
+
+        // Validate Repeat Password
+        if (repeatPassword !== password) throw "Password not confirmed. Please, try again";
+
+        // Validate Terms of Service checkbox
+        if (!termsChecked) throw "You must agree to the Terms of Service";
+
+        result.innerText = "✅ Form submitted";
+      } catch (err) {
+        result.innerText = "❌ Error: " + err;
+      }
+    }
+  </script>
+</body>
+</html>
