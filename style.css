@@ -50,7 +50,7 @@ input[type="text"], input[type="email"], input[type="password"]{
     padding: 15px;
     margin: 5px;
     border-radius:8px;
-    border: 1px solid grey;
+    border: 1px solid rgb(71, 70, 70);
     width:80%;
 }
 #repeat_password{
